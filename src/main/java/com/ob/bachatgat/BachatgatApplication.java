@@ -1,0 +1,13 @@
+package com.ob.bachatgat;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class BachatgatApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(BachatgatApplication.class, args);
+	}
+
+}
