@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "members")
@@ -21,26 +23,30 @@ public class Members extends BaseEntity {
     private String memberName;
 
     @Column(name = "phone_number")
-    private BigDecimal PhoneNumber;
+    private BigDecimal phoneNumber;
 
     @Column(name = "address")
-    private String Address;
+    private String address;
 
     @Column(name = "joining_date")
     private LocalDate joiningDate;
+
+    @OneToMany(mappedBy = "members" ,cascade =CascadeType.ALL,orphanRemoval = true)
+    private List<Savings> savings=new ArrayList<>();
 
 
 
     public Members() {
     }
 
-    public Members(Long memberId, String memberCode, String memberName, BigDecimal phoneNumber, String address, LocalDate joiningDate) {
+    public Members(Long memberId, String memberCode, String memberName, BigDecimal phoneNumber, String address, LocalDate joiningDate, List<Savings> savings) {
         this.memberId = memberId;
         this.memberCode = memberCode;
         this.memberName = memberName;
-        PhoneNumber = phoneNumber;
-        Address = address;
+        this.phoneNumber = phoneNumber;
+        this.address = address;
         this.joiningDate = joiningDate;
+        this.savings = savings;
     }
 
     public Long getMemberId() {
@@ -68,19 +74,19 @@ public class Members extends BaseEntity {
     }
 
     public BigDecimal getPhoneNumber() {
-        return PhoneNumber;
+        return phoneNumber;
     }
 
     public void setPhoneNumber(BigDecimal phoneNumber) {
-        PhoneNumber = phoneNumber;
+        this.phoneNumber = phoneNumber;
     }
 
     public String getAddress() {
-        return Address;
+        return address;
     }
 
     public void setAddress(String address) {
-        Address = address;
+        this.address = address;
     }
 
     public LocalDate getJoiningDate() {
@@ -91,5 +97,11 @@ public class Members extends BaseEntity {
         this.joiningDate = joiningDate;
     }
 
+    public List<Savings> getSavings() {
+        return savings;
+    }
 
+    public void setSavings(List<Savings> savings) {
+        this.savings = savings;
+    }
 }
