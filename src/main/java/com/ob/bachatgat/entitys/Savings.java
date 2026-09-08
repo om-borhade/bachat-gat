@@ -7,6 +7,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
+@Table(name = "savings")
 public class Savings extends BaseEntity {
 
     @Id
@@ -16,7 +17,7 @@ public class Savings extends BaseEntity {
 
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name = "member_id",referencedColumnName = "id")
-    private Long memberId;
+    private Members memberId;
 
     @Column(name = "amount")
     private BigDecimal amount;
@@ -34,7 +35,7 @@ public class Savings extends BaseEntity {
     public Savings() {
     }
 
-    public Savings(Long saving_id, Long memberId, BigDecimal amount, LocalDateTime savingMonth, LocalDateTime paymentDate, String paymentReference) {
+    public Savings(Long saving_id, Members memberId, BigDecimal amount, LocalDateTime savingMonth, LocalDateTime paymentDate, String paymentReference) {
         this.saving_id = saving_id;
         this.memberId = memberId;
         this.amount = amount;
@@ -51,11 +52,11 @@ public class Savings extends BaseEntity {
         this.saving_id = saving_id;
     }
 
-    public Long getMemberId() {
+    public Members getMemberId() {
         return memberId;
     }
 
-    public void setMemberId(Long memberId) {
+    public void setMemberId(Members memberId) {
         this.memberId = memberId;
     }
 

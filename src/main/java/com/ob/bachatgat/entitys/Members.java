@@ -31,9 +31,20 @@ public class Members extends BaseEntity {
     @Column(name = "joining_date")
     private LocalDate joiningDate;
 
-    @OneToMany(mappedBy = "members" ,cascade =CascadeType.ALL,orphanRemoval = true)
+    @OneToMany(mappedBy = "memberId" ,cascade =CascadeType.ALL,orphanRemoval = true)
     private List<Savings> savings=new ArrayList<>();
 
+    @OneToMany(mappedBy = "member" ,cascade =CascadeType.ALL,orphanRemoval = true)
+    private List<InterestTransaction> interestTransactions=new ArrayList<>();
+
+    @OneToMany(mappedBy = "memberId",cascade = CascadeType.ALL,orphanRemoval = true)
+    private List<LoanRepayments> loanRepayments =new ArrayList<>();
+
+    @OneToMany(mappedBy = "memberId",cascade = CascadeType.ALL,orphanRemoval = true)
+    private List<Loans> loans=new ArrayList<>();
+
+    @OneToMany(mappedBy = "member" ,cascade = CascadeType.ALL,orphanRemoval = true)
+    private List<MeetingAttendance> meetingAttendances=new ArrayList<>();
 
 
     public Members() {

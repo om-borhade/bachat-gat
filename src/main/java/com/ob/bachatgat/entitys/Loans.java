@@ -18,7 +18,7 @@ public class Loans {
 
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name = "member_id",referencedColumnName = "id")
-    private Long memberId;
+    private Members memberId;
 
     @Column(name = "loan_number")
     private String loanNumber;
@@ -51,13 +51,13 @@ public class Loans {
     @Column(name = "approved_by")
     private Long approvedBy;// the id of member how approved that loan;
 
-    @OneToMany(mappedBy = "loans",cascade = CascadeType.ALL,orphanRemoval = true)
+    @OneToMany(mappedBy = "loanId",cascade = CascadeType.ALL,orphanRemoval = true)
     private List<LoanRepayments> loanRepayments=new ArrayList<>();
 
     public Loans() {
     }
 
-    public Loans(Long loanId, Long memberId, String loanNumber, BigDecimal loanAmount, BigDecimal interestRate, LocalDate startDate, LocalDate dueDate, BigDecimal totalInterest, BigDecimal outstandingPrincipal, BigDecimal outstandingInterest, LocalDateTime approvedAt, Long approvedBy) {
+    public Loans(Long loanId, Members memberId, String loanNumber, BigDecimal loanAmount, BigDecimal interestRate, LocalDate startDate, LocalDate dueDate, BigDecimal totalInterest, BigDecimal outstandingPrincipal, BigDecimal outstandingInterest, LocalDateTime approvedAt, Long approvedBy, List<LoanRepayments> loanRepayments) {
         this.loanId = loanId;
         this.memberId = memberId;
         this.loanNumber = loanNumber;
@@ -70,6 +70,7 @@ public class Loans {
         this.outstandingInterest = outstandingInterest;
         this.approvedAt = approvedAt;
         this.approvedBy = approvedBy;
+        this.loanRepayments = loanRepayments;
     }
 
     public Long getLoanId() {
@@ -80,12 +81,20 @@ public class Loans {
         this.loanId = loanId;
     }
 
-    public Long getMemberId() {
+    public Members getMemberId() {
         return memberId;
     }
 
-    public void setMemberId(Long memberId) {
+    public void setMemberId(Members memberId) {
         this.memberId = memberId;
+    }
+
+    public List<LoanRepayments> getLoanRepayments() {
+        return loanRepayments;
+    }
+
+    public void setLoanRepayments(List<LoanRepayments> loanRepayments) {
+        this.loanRepayments = loanRepayments;
     }
 
     public String getLoanNumber() {
